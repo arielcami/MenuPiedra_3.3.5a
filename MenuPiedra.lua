@@ -659,8 +659,6 @@ local teleH = {
 
 local function Menu(E,P,U,S,I)
 
-    local function T(M,X,Y,Z,O) P:Teleport(M,X,Y,Z,O) end
-
     if S+I==0 then Click(E,P,U) end
 
     local L, C = P:GetLevel(), P:GetClassMask()     
