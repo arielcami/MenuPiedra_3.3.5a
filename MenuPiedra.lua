@@ -1,5 +1,5 @@
 --[[ 
-        Ariel Camilo // ariel.cami@gmail.com // 16 de Agosto 2022  
+    Ariel Camilo // ariel.cami@gmail.com // 4 de Octubre 2022  
 
     No se puede usar en combate.
 
@@ -15,6 +15,11 @@
     este buff contará como propio, y no podrás acumularlo con otra bendición de tu libro de hechizos.
 
     La Alianza tiene un Menú diferente a la Horda, si deseas agregar más destinos, no olvides agregarlos también a la tabla de la Horda.
+
+    Sistema de guardado de ubicación: Se guarda solo una ubicación por vez y se borra al teletransportarse a ella, 
+    para evitar que los jugadores se aprovechen de esto y hagan trampas.
+
+    No se puede guardar/usar una ubicación mientras estás en combate/montura/en movimiento.
 ]]
 
 local ic,ix,cc = {
@@ -431,6 +436,14 @@ local function Click(e,p,u)
     p:GossipMenuAddItem(8, ic[1].."Buffs",                     1000,0)
     p:GossipMenuAddItem(8, ic[2].."Teleportarse",              2000,0)
     p:GossipMenuAddItem(8, ic[3].."Solicitar Comida y Bebida", 3000,0)
+    p:GossipMenuAddItem(4, "Guardar punto de ubicación.",      4000,0)
+
+    local guid = p:GetGUIDLow()
+    local PP = CharDBQuery("SELECT `coord_X` FROM `aa_tele` WHERE `guid` = "..guid.."")
+    if PP:GetFloat(0) == 0 then         
+    else 
+        p:GossipMenuAddItem(2, "Regresar a la ubicación.",     5000,0)
+    end
     p:GossipSendMenu(1,u)
 end
 
@@ -731,7 +744,7 @@ local function Menu(E,P,U,S,I)
                 P:GossipComplete()
             return  
             else
-                P:SendBroadcastMessage('Para ir allí necesito haber alcanzado el nivel '..Lev..'.') P:GossipComplete() return
+                P:SendBroadcastMessage('Para ir allí necesitas haber alcanzado el nivel '..Lev..'.') P:GossipComplete() return
             end
         end
     end
@@ -796,6 +809,44 @@ local function Menu(E,P,U,S,I)
             end
         end    
     end
+
+    if S==4000 then        
+        if P:IsMoving() then P:SendBroadcastMessage("|cffed0000No puedes guardar una ubicación mientras te mueves.") P:GossipComplete() return end
+        if P:IsInCombat() then P:SendBroadcastMessage("|cffed0000Estás en combate.") P:GossipComplete() return end
+        if P:IsMounted() then P:SendBroadcastMessage("|cffed0000Debes bajar de tu montura.") P:GossipComplete() return end
+        local guid, map, c_x, c_y, c_z, orien = P:GetGUIDLow(), P:GetMapId(), P:GetX(), P:GetY(), P:GetZ(), P:GetO()        
+        CharDBExecute("UPDATE `aa_tele` SET `map` = "..map..", `coord_X`= "..c_x..", `coord_Y`= "..c_y..", `coord_Z`= "..c_z..", `orien`= "..orien.." WHERE `guid` = "..guid.."")
+        P:SendBroadcastMessage("|cff27c279Ubicación guardada.")
+        P:GossipComplete()
+        return
+    end
+
+    if S==5000 then 
+        if P:IsMoving() then P:SendBroadcastMessage("|cffed0000No puedes regresar a tu ubicación mientras te mueves.") P:GossipComplete() return end
+        if P:IsInCombat() then P:SendBroadcastMessage("|cffed0000Estás en combate.") P:GossipComplete() return end
+        if P:IsMounted() then P:SendBroadcastMessage("|cffed0000Debes bajar de tu montura.") P:GossipComplete() return end
+
+        local guid = P:GetGUIDLow()
+        local QT = CharDBQuery("SELECT `map`, `coord_X`, `coord_Y`, `coord_Z`, `orien` FROM `aa_tele` WHERE `guid` = "..guid.."")
+
+        local Tmap, Tx, Ty, Tz, To, Guid = QT:GetInt8(0), QT:GetFloat(1), QT:GetFloat(2), QT:GetFloat(3), QT:GetFloat(4), P:GetGUIDLow()        
+        P:Teleport(Tmap,Tx,Ty,Tz,To)  P:SendBroadcastMessage("|cff27c279Has regresado a la ubicación guardada.") 
+        CharDBExecute("UPDATE `aa_tele` SET `coord_X` = 0, `coord_Y` = 0, `coord_Z` = 0, `orien` = 0 WHERE `guid`= "..Guid.."")
+        P:GossipComplete()        
+        return
+    end
+end
+
+local function LogIn(E,P) 
+    local guid = P:GetGUIDLow()
+    CharDBExecute("INSERT IGNORE INTO `aa_tele` (`guid`,`map`,`coord_X`,`coord_Y`,`coord_Z`,`orien`) VALUES ("..guid..", 0, 0, 0, 0, 0)")
+end
+
+local function Eluna(E)
+    CharDBExecute("CREATE TABLE IF NOT EXISTS `aa_tele` (`guid` INT(10) NOT NULL UNIQUE, `map` SMALLINT(5) NOT NULL, "..
+    "`coord_X` FLOAT NOT NULL, `coord_Y` FLOAT NOT NULL, `coord_Z` FLOAT NOT NULL, `orien` FLOAT NOT NULL)")
 end
 RegisterItemGossipEvent(6948, 1, Click)
 RegisterItemGossipEvent(6948, 2,  Menu)
+RegisterPlayerEvent(3, LogIn)
+RegisterServerEvent(33, Eluna)
