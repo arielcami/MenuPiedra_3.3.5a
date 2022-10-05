@@ -116,15 +116,15 @@ local MENU_A = {
 
     [6]={--Mazmorras
             [1]={--Clásicas
-                {8, ix.."15. Las Cuevas de los Lamentos",   3, 29, false,  cc.." a Las Cuevas de los Lamentos"},
-                {8, ix.."18. Las Minas de la Muerte",       3, 30, false,  cc.." a Las Minas de la Muerte?"},
-                {8, ix.."22. Castillo de Colmillo Oscuro",  3, 31, false,  cc.." al Castillo de Colmillo Oscuro?"},
-                {8, ix.."22. Las Mazmorras de Ventormenta", 3, 28, false,  cc.." a Las Mazmorras de Ventormenta?"},
-                {8, ix.."24. Cavernas de Brazanegra",       3, 32, false,  cc.." a Cavernas de Brazanegra?"},
-                {8, ix.."29. Gnomeregan",                   3, 33, false,  cc.." a Gnomeregan?"},
-                {8, ix.."30. Horado Rajaciento",            3, 34, false,  cc.." a Horado Rajaciento?"},
-                {8, ix.."26-35. Monasterio Escarlata",      3, 35, false,  cc.." al Monasterio Escarlata?"}, 
-                {8, ix.."40. Zahúrda Rajaciento",           3, 36, false,  cc.." a Zahúrda Rajaciento?"},
+                {8, ix.."15. Las Cuevas de los Lamentos",   3, 29, false, cc.." a Las Cuevas de los Lamentos"},
+                {8, ix.."18. Las Minas de la Muerte",       3, 30, false, cc.." a Las Minas de la Muerte?"},
+                {8, ix.."22. Castillo de Colmillo Oscuro",  3, 31, false, cc.." al Castillo de Colmillo Oscuro?"},
+                {8, ix.."22. Las Mazmorras de Ventormenta", 3, 28, false, cc.." a Las Mazmorras de Ventormenta?"},
+                {8, ix.."24. Cavernas de Brazanegra",       3, 32, false, cc.." a Cavernas de Brazanegra?"},
+                {8, ix.."29. Gnomeregan",                   3, 33, false, cc.." a Gnomeregan?"},
+                {8, ix.."30. Horado Rajaciento",            3, 34, false, cc.." a Horado Rajaciento?"},
+                {8, ix.."26-35. Monasterio Escarlata",      3, 35, false, cc.." al Monasterio Escarlata?"}, 
+                {8, ix.."40. Zahúrda Rajaciento",           3, 36, false, cc.." a Zahúrda Rajaciento?"},
                 {8, ix.."42. Uldaman",                      3, 37, false, cc.." a Uldaman?"},
                 {8, ix.."44. Zul'Farrak",                   3, 38, false, cc.." a Zul'Farrak?"},
                 {8, ix.."46-48. Maraudon",                  3, 39, false, cc.." a Maraudon?"},
@@ -290,15 +290,15 @@ local MENU_H = {
                 {8, ix.."30. Horado Rajaciento",            3, 34, false,  cc.." a Horado Rajaciento?"},
                 {8, ix.."26-35. Monasterio Escarlata",      3, 35, false,  cc.." al Monasterio Escarlata?"}, 
                 {8, ix.."40. Zahúrda Rajaciento",           3, 36, false,  cc.." a Zahúrda Rajaciento?"},
-                {8, ix.."42. Uldaman",                      3, 37, false, cc.." a Uldaman?"},
-                {8, ix.."44. Zul'Farrak",                   3, 38, false, cc.." a Zul'Farrak?"},
-                {8, ix.."46-48. Maraudon",                  3, 39, false, cc.." a Maraudon?"},
-                {8, ix.."50. El Templo de Atal'Hakkar",     3, 40, false, cc.." al Templo de Atal'Hakkar?"},
-                {8, ix.."52. Profundidades de Roca Negra",  3, 41, false, cc.." a Profundidades de Roca Negra?"},
-                {8, ix.."55-58. Cumbre de Roca Negra",      3, 42, false, cc.." a Cumbre de Roca Negra?"},
-                {8, ix.."58. Scholomance",                  3, 43, false, cc.." a Scholomance?"},
-                {8, ix.."58. Stratholme",                   3, 44, false, cc.." a Stratholme?"},
-                {8, ix.."58. La Masacre",                   3, 45, false, cc.." a La Masacre?"},
+                {8, ix.."42. Uldaman",                      3, 37, false,  cc.." a Uldaman?"},
+                {8, ix.."44. Zul'Farrak",                   3, 38, false,  cc.." a Zul'Farrak?"},
+                {8, ix.."46-48. Maraudon",                  3, 39, false,  cc.." a Maraudon?"},
+                {8, ix.."50. El Templo de Atal'Hakkar",     3, 40, false,  cc.." al Templo de Atal'Hakkar?"},
+                {8, ix.."52. Profundidades de Roca Negra",  3, 41, false,  cc.." a Profundidades de Roca Negra?"},
+                {8, ix.."55-58. Cumbre de Roca Negra",      3, 42, false,  cc.." a Cumbre de Roca Negra?"},
+                {8, ix.."58. Scholomance",                  3, 43, false,  cc.." a Scholomance?"},
+                {8, ix.."58. Stratholme",                   3, 44, false,  cc.." a Stratholme?"},
+                {8, ix.."58. La Masacre",                   3, 45, false,  cc.." a La Masacre?"},
                 {7,"...Atrás", 2, 4}},
             [2]={--Mazmorras The Burning Crusade 
                 {8, ix.."60. Murallas del Fuego Infernal",      3, 46, false, cc.." a Murallas del Fuego Infernal?"},    
@@ -672,6 +672,10 @@ local teleH = {
 
 local function Menu(E,P,U,S,I)
 
+    function c() P:GossipComplete() end  
+    function bc(i) P:SendBroadcastMessage(i) end  
+    function at(a) P:SendAreaTriggerMessage(a) end
+
     if S+I==0 then Click(E,P,U) end
 
     local L, C = P:GetLevel(), P:GetClassMask()     
@@ -741,10 +745,10 @@ local function Menu(E,P,U,S,I)
             if L >= Lev then
                 local _M, _X, _Y, _Z ,_O = tele[S][I][1], tele[S][I][2], tele[S][I][3], tele[S][I][4], tele[S][I][5]
                 P:Teleport(_M,_X,_Y,_Z,_O)             
-                P:GossipComplete()
+                c()
             return  
             else
-                P:SendBroadcastMessage('Para ir allí necesitas haber alcanzado el nivel '..Lev..'.') P:GossipComplete() return
+                bc('Para ir allí necesitas haber alcanzado el nivel '..Lev..'.') c() return
             end
         end
     end
@@ -773,66 +777,75 @@ local function Menu(E,P,U,S,I)
     if S==1 then   local buf='|cff00ff80¡Buff aplicado!'
         if I==1 then 
             --Palabra de poder: entereza
-            P:CastSpell(P, BUFF[I][buff1(L)], true) P:SendAreaTriggerMessage(buf) Menu(E,P,U,1000,0)
+            P:CastSpell(P, BUFF[I][buff1(L)], true) at(buf) Menu(E,P,U,1000,0)
         elseif I==2 then 
             -- Espíritu divino
-            if buff2(L)==0 then P:SendBroadcastMessage('Debes alcanzar el nivel 20.') Menu(E,P,U,1000,0)
+            if buff2(L)==0 then bc('Debes alcanzar el nivel 20.') Menu(E,P,U,1000,0)
             else
-                P:CastSpell(P, BUFF[I][buff2(L)], true) P:SendAreaTriggerMessage(buf) Menu(E,P,U,1000,0)
+                P:CastSpell(P, BUFF[I][buff2(L)], true) at(buf) Menu(E,P,U,1000,0)
             end
         elseif I==3 then 
             --Marca de lo salvaje
-            P:CastSpell(P, BUFF[I][buff3(L)], true) P:SendAreaTriggerMessage(buf) Menu(E,P,U,1000,0)
+            P:CastSpell(P, BUFF[I][buff3(L)], true) at(buf) Menu(E,P,U,1000,0)
         elseif I==4 then
             --Intelecto arcano            
-            P:CastSpell(P, BUFF[I][buff4(L)], true) P:SendAreaTriggerMessage(buf) Menu(E,P,U,1000,0)
+            P:CastSpell(P, BUFF[I][buff4(L)], true) at(buf) Menu(E,P,U,1000,0)
         elseif I==5 then
             --Bendición de reyes
-            if buff5(L)==0 then P:SendBroadcastMessage('Debes alcanzar el nivel 12.') Menu(E,P,U,1000,0)
+            if buff5(L)==0 then bc('Debes alcanzar el nivel 12.') Menu(E,P,U,1000,0)
             else
-                P:CastSpell(P, BUFF[I][buff5(L)], true) P:SendAreaTriggerMessage(buf) Menu(E,P,U,1000,0)
+                P:CastSpell(P, BUFF[I][buff5(L)], true) at(buf) Menu(E,P,U,1000,0)
             end
         elseif I==6 then
             --Bendición de poderío
-            P:CastSpell(P, BUFF[I][buff6(L)], true) P:SendAreaTriggerMessage(buf) Menu(E,P,U,1000,0)
+            P:CastSpell(P, BUFF[I][buff6(L)], true) at(buf) Menu(E,P,U,1000,0)
         elseif I==7 then
             --Bendición de sabiduría
-            if buff7(L)==0 then P:SendBroadcastMessage('Debes alcanzar el nivel 4.') Menu(E,P,U,1000,0)
+            if buff7(L)==0 then bc('Debes alcanzar el nivel 4.') Menu(E,P,U,1000,0)
             else
-                P:CastSpell(P, BUFF[I][buff7(L)], true) P:SendAreaTriggerMessage(buf) Menu(E,P,U,1000,0)
+                P:CastSpell(P, BUFF[I][buff7(L)], true) at(buf) Menu(E,P,U,1000,0)
             end
         elseif I==8 then
             --Bendición de salvaguardia
-            if buff8(L)==0 then P:SendBroadcastMessage('Debes alcanzar el nivel 20.') Menu(E,P,U,1000,0)
+            if buff8(L)==0 then bc('Debes alcanzar el nivel 20.') Menu(E,P,U,1000,0)
             else
-                P:CastSpell(P, BUFF[I][buff8(L)], true) P:SendAreaTriggerMessage(buf) Menu(E,P,U,1000,0)
+                P:CastSpell(P, BUFF[I][buff8(L)], true) at(buf) Menu(E,P,U,1000,0)
             end
         end    
     end
 
     if S==4000 then        
-        if P:IsMoving() then P:SendBroadcastMessage("|cffed0000No puedes guardar una ubicación mientras te mueves.") P:GossipComplete() return end
-        if P:IsInCombat() then P:SendBroadcastMessage("|cffed0000Estás en combate.") P:GossipComplete() return end
-        if P:IsMounted() then P:SendBroadcastMessage("|cffed0000Debes bajar de tu montura.") P:GossipComplete() return end
-        local guid, map, c_x, c_y, c_z, orien = P:GetGUIDLow(), P:GetMapId(), P:GetX(), P:GetY(), P:GetZ(), P:GetO()        
-        CharDBExecute("UPDATE `aa_tele` SET `map` = "..map..", `coord_X`= "..c_x..", `coord_Y`= "..c_y..", `coord_Z`= "..c_z..", `orien`= "..orien.." WHERE `guid` = "..guid.."")
-        P:SendBroadcastMessage("|cff27c279Ubicación guardada.")
-        P:GossipComplete()
+        if P:IsMoving() then bc("|cffed0000No puedes guardar una ubicación mientras te mueves.") c() return end
+        if P:IsInCombat() then bc("|cffed0000Estás en combate.") c() return end
+        if P:IsMounted() then bc("|cffed0000Debes bajar de tu montura.") c() return end
+        local guid, map, c_x, c_y, c_z, orien = P:GetGUIDLow(), P:GetMap():GetMapId() , P:GetX(), P:GetY(), P:GetZ(), P:GetO()        
+        CharDBExecute("UPDATE `aa_tele` SET `map` = "..map..", `coord_X`= "..c_x..", `coord_Y`= "..c_y..", `coord_Z`= "..
+        c_z..", `orien`= "..orien.." WHERE `guid` = "..guid.."")
+        bc("|cff27c279Ubicación guardada.") c()
         return
     end
 
     if S==5000 then 
-        if P:IsMoving() then P:SendBroadcastMessage("|cffed0000No puedes regresar a tu ubicación mientras te mueves.") P:GossipComplete() return end
-        if P:IsInCombat() then P:SendBroadcastMessage("|cffed0000Estás en combate.") P:GossipComplete() return end
-        if P:IsMounted() then P:SendBroadcastMessage("|cffed0000Debes bajar de tu montura.") P:GossipComplete() return end
+        if P:IsMoving() then bc("|cffed0000No puedes regresar a tu ubicación mientras te mueves.") c() return end
+        if P:IsInCombat() then bc("|cffed0000Estás en combate.") c() return end
+        if P:IsMounted() then bc("|cffed0000Debes bajar de tu montura.") c() return end
 
         local guid = P:GetGUIDLow()
         local QT = CharDBQuery("SELECT `map`, `coord_X`, `coord_Y`, `coord_Z`, `orien` FROM `aa_tele` WHERE `guid` = "..guid.."")
 
-        local Tmap, Tx, Ty, Tz, To, Guid = QT:GetInt8(0), QT:GetFloat(1), QT:GetFloat(2), QT:GetFloat(3), QT:GetFloat(4), P:GetGUIDLow()        
-        P:Teleport(Tmap,Tx,Ty,Tz,To)  P:SendBroadcastMessage("|cff27c279Has regresado a la ubicación guardada.") 
+        local Tmap, Tx, Ty, Tz, To, Guid = QT:GetInt32(0), QT:GetFloat(1), QT:GetFloat(2), QT:GetFloat(3), QT:GetFloat(4), P:GetGUIDLow()        
+        P:Teleport(Tmap,Tx,Ty,Tz,To)
+
+--[[        local co = "|cffffffff"                     --PARA DEBUG--
+            P:SendBroadcastMessage("Map: "..co..Tmap)
+            P:SendBroadcastMessage("X: "..co..Tx)
+            P:SendBroadcastMessage("Y: "..co..Ty)
+            P:SendBroadcastMessage("Z: "..co..Tz)
+            P:SendBroadcastMessage("O: "..co..To)
+]]
+        bc("|cff27c279Has regresado a la ubicación guardada.")
         CharDBExecute("UPDATE `aa_tele` SET `coord_X` = 0, `coord_Y` = 0, `coord_Z` = 0, `orien` = 0 WHERE `guid`= "..Guid.."")
-        P:GossipComplete()        
+        c()        
         return
     end
 end
