@@ -1,5 +1,5 @@
 --[[ 
-    Ariel Camilo // ariel.cami@gmail.com // 4 de Octubre 2022  
+    Ariel Camilo // ariel.cami@gmail.com // 19 de Febrero 2023 
 
     No se puede usar en combate.
 
@@ -27,8 +27,8 @@ local ic,ix,cc = {
     '|TInterface\\Icons\\Spell_Shadow_Teleport.blp:35:35:-21|t',                    -- 2 Teleportes
     '|TInterface\\Icons\\Ability_Mage_ConjureFoodRank10.blp:35:35:-21|t',           -- 3 Comida y bebida
     '|TInterface\\Icons\\Spell_Nature_FarSight.blp:45:45:-21|t',                    -- 4 Azeroth
-    '|TInterface\\LFGFrame\\LFGICON-BLACKTEMPLE.BLP:45:45:-21|t',                   -- 5 Terrallende
-    '|TInterface\\ICONS\\Achievement_Boss_LichKing.blp:45:45:-21|t',                -- 6 Rasganorte
+    '|TInterface\\ICONS\\achievement_zone_outland_01.blp:45:45:-21|t',              -- 5 Terrallende
+    '|TInterface\\ICONS\\achievement_zone_northrend_01.blp:45:45:-21|t',            -- 6 Rasganorte
     '|TInterface\\Icons\\Spell_Arcane_TeleportStormWind.blp:30:30:-21|t',           -- 7 Ventormenta
     '|TInterface\\Icons\\Spell_Arcane_TeleportExodar.blp:30:30:-21|t',              -- 8 El Exodar
     '|TInterface\\Icons\\Spell_Arcane_TeleportDarnassus.blp:30:30:-21|t',           -- 9 Darnassus
@@ -47,7 +47,18 @@ local ic,ix,cc = {
     '|TInterface\\Icons\\Spell_Magic_GreaterBlessingofKings.blp:30:30:-21|t',       -- 22 Bendición de Reyes superior
     '|TInterface\\Icons\\Spell_Holy_GreaterBlessingofKings.blp:30:30:-21|t',        -- 23 Bendición de Poderío superior
     '|TInterface\\Icons\\Spell_Holy_GreaterBlessingofWisdom.blp:30:30:-21|t',       -- 24 Bendición de Sabiduría superior
-    '|TInterface\\Icons\\Spell_Holy_GreaterBlessingofSanctuary.blp:30:30:-21|t'     -- 25 Bendición de Salvaguardia superior
+    '|TInterface\\Icons\\Spell_Holy_GreaterBlessingofSanctuary.blp:30:30:-21|t',    -- 25 Bendición de Salvaguardia superior
+    '|TInterface\\Icons\\ability_hunter_markedfordeath.blp:35:35:-21|t',            -- Icono Marca 26
+    '|TInterface\\Icons\\spell_arcane_portaldarnassus.blp:35:35:-21|t',             -- Icono Portal 27
+    '|TInterface\\Icons\\spell_arcane_teleportorgrimmar.blp:45:45:-21|t',           -- Icono Orgrimmar 28
+    '|TInterface\\Icons\\inv_misc_gem_pearl_04.blp:35:35:-21|t',                    -- Orbe dorado 29
+    '|TInterface\\Icons\\ability_shaman_cleansespirit.blp:33:33:-21|t',             -- Icono Limpiar Espíritu 30
+    '|TInterface\\Icons\\spell_shadow_deathscream.blp:33:33:-21|t',                 -- Dolencia 31
+    '|TInterface\\Icons\\inv_hammer_20.blp:33:33:-21|t',                            -- Reparar (Martillo) 32
+    '|TInterface\\Icons\\achievement_general.blp:33:33:-21|t',                      -- Logro general Wow 33
+    '|TInterface\\Icons\\inv_misc_bag_10.blp:33:33:-21|t',                          -- Bolsa 34
+    '|TInterface\\Icons\\spell_arcane_arcane04.blp:33:33:-21|t',                    -- Chispa arcana 35
+    '|TInterface\\Icons\\inv_letter_15.blp:33:33:-21|t',                            -- Correo 36
     },'|TInterface\\Icons\\Spell_Shadow_Teleport.blp:15:15:-21|t', "¿Deseas viajar"
 
 local MENU_A = {
@@ -60,7 +71,7 @@ local MENU_A = {
         {8, ic[23].."Bendición de poderío",         1, 6},
         {8, ic[24].."Bendición de sabiduría",       1, 7},
         {8, ic[25].."Bendición de salvaguardia",    1, 8},
-        {0, "...Atrás",                     0, 0}},
+        {7, "...Atrás",                     0, 0}},
     [2000]={       
         {8, ic[4].."Azeroth",       2, 1},
         {8, ic[5].."Terrallende",   2, 2},
@@ -113,7 +124,6 @@ local MENU_A = {
             {8, ix.."Wrath of the Lich King",   6, 6},
             {7,"...Atrás", 2000, 0}},    
     },
-
     [6]={--Mazmorras
             [1]={--Clásicas
                 {8, ix.."15. Las Cuevas de los Lamentos",   3, 29, false, cc.." a Las Cuevas de los Lamentos"},
@@ -200,7 +210,6 @@ local MENU_A = {
                 {8, ix.."80. El Sagrario Rubí",                         3, 99, false, cc.." a El Sagrario Rubí?"},
                 {7,"...Atrás", 2, 5}},            
         },
-
     [3000]={
         {5349,   5350}, 
         {1113,   2288},
@@ -212,8 +221,7 @@ local MENU_A = {
         {22895, 30703},
         {34062,   nil},
         {43518,   nil},
-        {43523,   nil},},
-}
+        {43523,   nil},},}
 
 local MENU_H = {
     [1000]={
@@ -225,9 +233,9 @@ local MENU_H = {
         {8, ic[23].."Bendición de poderío",         1, 6},
         {8, ic[24].."Bendición de sabiduría",       1, 7},
         {8, ic[25].."Bendición de salvaguardia",    1, 8},
-        {0, "...Atrás",                     0, 0}},
+        {7, "...Atrás",                     0, 0}},
     [2000]={       
-        {8, ic[4].."Azeroth",       2, 1},
+        {8, ic[28].."Azeroth",      2, 1},
         {8, ic[5].."Terrallende",   2, 2},
         {8, ic[6].."Rasganorte",    2, 3},
         {8, ix.."Mazmorras",        2, 4},
@@ -235,7 +243,7 @@ local MENU_H = {
         {7, "...Atrás",     0, 0}},
     [2]={
         [1]={--Azeroth
-            {8, ix.."5. Orgrimmar",             3, 1, false, cc.." a Orgrimmar?"},
+            {8, ix.."5. Orgrimmar",          3, 1, false, cc.." a Orgrimmar?"},
             {8, ix.."5. Cima del Trueno",       3, 2, false, cc.." a Cima del Trueno?"},
             {8, ix.."5. Entrañas",              3, 3, false, cc.." a Entrañas?"},
             {8, ix.."5. Ciudad de Lunargenta",  3, 4, false, cc.." a la Ciudad de Lunargenta?"},
@@ -278,10 +286,9 @@ local MENU_H = {
             {8, ix.."Wrath of the Lich King",   6, 6},
             {7,"...Atrás", 2000, 0}},    
     },
-
     [6]={--Mazmorras
             [1]={--Clásicas
-                {8, ix.."10. Cima ígnea",                   3, 28, false,  cc.." a Cima ígnea?"},               
+                {8, ix.."10. Sima ígnea",                   3, 28, false,  cc.." a Sima ígnea?"},               
                 {8, ix.."15. Las Cuevas de los Lamentos",   3, 29, false,  cc.." a Las Cuevas de los Lamentos"},
                 {8, ix.."18. Las Minas de la Muerte",       3, 30, false,  cc.." a Las Minas de la Muerte?"},
                 {8, ix.."22. Castillo de Colmillo Oscuro",  3, 31, false,  cc.." al Castillo de Colmillo Oscuro?"},                
@@ -432,17 +439,18 @@ local BUFF = {
 }
 
 local function Click(e,p,u)
-    if p:IsInCombat() then p:SendBroadcastMessage('|cffd90f0fEstás en combate.') return end    
-    p:GossipMenuAddItem(8, ic[1].."Buffs",                     1000,0)
-    p:GossipMenuAddItem(8, ic[2].."Teleportarse",              2000,0)
-    p:GossipMenuAddItem(8, ic[3].."Solicitar Comida y Bebida", 3000,0)
-    p:GossipMenuAddItem(4, "Guardar punto de ubicación.",      4000,0)
+    if p:IsInCombat() then p:SendBroadcastMessage('|cffd90f0fEstás en combate.') return end   
+    p:GossipMenuAddItem(8, ic[1].."Buffs",                          1000,0)
+    p:GossipMenuAddItem(8, ic[2].."Teleportarse",                   2000,0)
+    p:GossipMenuAddItem(8, ic[3].."Solicitar Comida y Bebida",      3000,0)
+    p:GossipMenuAddItem(8, ic[29].."Servicios",                     9999,0)
+    p:GossipMenuAddItem(4, ic[26].."Guardar punto de ubicación.",   4000,0)
 
     local guid = p:GetGUIDLow()
     local PP = CharDBQuery("SELECT `coord_X` FROM `aa_tele` WHERE `guid` = "..guid.."")
     if PP:GetFloat(0) == 0 then         
     else 
-        p:GossipMenuAddItem(2, "Regresar a la ubicación.",     5000,0)
+        p:GossipMenuAddItem(2, ic[27].."Regresar a la ubicación.",     5000,0)
     end
     p:GossipSendMenu(1,u)
 end
@@ -483,7 +491,7 @@ local teleA = {
     --Mazmorras Clásicas
         {0, -8771.42, 840.8729, 90.6448, 0.6613,        22},    --28 Mazmorras de Ventormenta
         {1, -738.7518, -2217.6589, 16.64, 2.6705,       15},    --29 Las Cuevas de los Lamentos
-        {36, -12.8273, -382.9282, 61.7997, 4.6076,      18},    --30 Las Minas de la Muerte
+        {0, -11206.699219, 1672.4846, 24.7763, 1.8084,  18},    --30 Las Minas de la Muerte
         {0, -234.8294, 1561.6988, 76.8923, 1.1964,      22},    --31 Castillo de Colmillo Oscuro        
         {1, 4247.5478, 742.5911, -25.0591, 1.4309,      24},    --32 Cavernas de Brazanegra
         {0, -5163.208, 925.1033, 257.1794, 1.5467,      29},    --33 Gnomeregan 29
@@ -562,7 +570,7 @@ local teleA = {
 local teleH = {    
     [3]={
     --Azeroth
-        {1, 1678.1777, -4314.0532, 61.5, 4.0726,        5},     --1 Orgrimmar      
+        {1, 1660.264526, -4395.87402, 22.1817, 4.57041, 5},     --1 Orgrimmar      
         {1, -1195.7438, 28.1298, 176.949, 2.883,        5},     --2 Cima del Trueno
         {0, 1569.0684, 267.1815, -43.1026, 4.3999,      5},     --3 Entrañas
         {530, 9687.3154, -7448.7885, 13.69, 1.6101,     5},     --4 Ciudad de Lunargenta
@@ -594,7 +602,7 @@ local teleH = {
     --Mazmorras Clásicas
         {1, 1812.8153, -4414.6191, -18.246, 5.1707,     10},    --28 Cima Ígnea
         {1, -738.7518, -2217.6589, 16.64, 2.6705,       15},    --29 Las Cuevas de los Lamentos
-        {36, -12.8273, -382.9282, 61.7997, 4.6076,      18},    --30 Las Minas de la Muerte
+        {0, -11206.699219, 1672.4846, 24.7763, 1.8084,  18},    --30 Las Minas de la Muerte
         {0, -234.8294, 1561.6988, 76.8923, 1.1964,      22},    --31 Castillo de Colmillo Oscuro        
         {1, 4247.5478, 742.5911, -25.0591, 1.4309,      24},    --32 Cavernas de Brazanegra
         {0, -5163.208, 925.1033, 257.1794, 1.5467,      29},    --33 Gnomeregan 29
@@ -773,6 +781,53 @@ local function Menu(E,P,U,S,I)
         P:GossipSendMenu(1,U)        
     end
 
+    if S==9999 then 
+        P:GossipClearMenu()
+        P:GossipMenuAddItem(8, ic[30].."Limpiar Debuffs",     5555, 0)
+        P:GossipMenuAddItem(8, ic[31].."Quitar Dolencia",     5556, 0)
+        P:GossipMenuAddItem(8, ic[32].."Reparar equipo",      5557, 0)
+        P:GossipMenuAddItem(8, ic[33].."Resetear talentos",   5558, 0, false, '¿Seguro deseas resetear tus talentos?')
+        P:GossipMenuAddItem(8, ic[35].."Resetear Cooldowns",  5560, 0)
+        P:GossipMenuAddItem(8, ic[34].."Abrir banco",         5559, 0)
+        P:GossipMenuAddItem(8, ic[36].."Abrir correo",        5561, 0)
+        P:GossipMenuAddItem(7,"...Atrás",              0, 0)
+        P:GossipSendMenu(1,U) 
+    end
+
+    if S==5555 then        
+        P:AddAura(40733,P)  P:RemoveAura(40733) c() bc("|cff00ffffTodos los Debuffs han sido limpiados.")
+    end
+
+    if S==5556 then
+        if P:HasAura(15007) then
+            P:RemoveAura(15007)  c() bc("|cff00ffffTu Dolencia de resurrección fue eliminada.")
+        else
+            bc("|cffff0000No sufres de Dolencia de resurrección.")  Menu(E,P,U,9999,0)
+        end
+    end
+
+    if S==5557 then
+        P:DurabilityRepairAll(false)  c() bc("|cff00ffffTu equipo ha sido reparado gratuitamente.")
+    end
+
+    if S==5558 then  P:ResetTalents()  c()
+        bc("|cff00ffffTus talentos han sido restablecidos.")
+    end
+
+    if S==5559 then 
+        P:SendShowBank(P)               
+    end
+
+    if S==5560 then 
+        P:ResetAllCooldowns()
+        c()
+        bc("|cff00ffffTodos tus CDs han sido restablecidos.")
+    end
+
+    if S==5561 then 
+        P:SendShowMailBox( P:GetGUIDLow() )  
+    end
+
     --BUFFS--------------------------------------------------------------------------------------------------------------------------------------
     if S==1 then   local buf='|cff00ff80¡Buff aplicado!'
         if I==1 then 
@@ -821,7 +876,7 @@ local function Menu(E,P,U,S,I)
         local guid, map, c_x, c_y, c_z, orien = P:GetGUIDLow(), P:GetMap():GetMapId() , P:GetX(), P:GetY(), P:GetZ(), P:GetO()        
         CharDBExecute("UPDATE `aa_tele` SET `map` = "..map..", `coord_X`= "..c_x..", `coord_Y`= "..c_y..", `coord_Z`= "..
         c_z..", `orien`= "..orien.." WHERE `guid` = "..guid.."")
-        bc("|cff27c279Ubicación guardada.") c()
+        bc("|cff00ffffUbicación guardada.") c()
         return
     end
 
@@ -843,7 +898,7 @@ local function Menu(E,P,U,S,I)
             P:SendBroadcastMessage("Z: "..co..Tz)
             P:SendBroadcastMessage("O: "..co..To)
 ]]
-        bc("|cff27c279Has regresado a la ubicación guardada.")
+        bc("|cff00ffffHas regresado a la ubicación guardada.")
         CharDBExecute("UPDATE `aa_tele` SET `coord_X` = 0, `coord_Y` = 0, `coord_Z` = 0, `orien` = 0 WHERE `guid`= "..Guid.."")
         c()        
         return
@@ -863,3 +918,8 @@ RegisterItemGossipEvent(6948, 1, Click)
 RegisterItemGossipEvent(6948, 2,  Menu)
 RegisterPlayerEvent(3, LogIn)
 RegisterServerEvent(33, Eluna)
+
+local function Al_Eliminar_Piedra(ev,pl,itemId) -->> Para evitar que los jugadores borren la Piedra.
+    local function Tiempo(eve, del, rep, OB) OB:AddItem(6948) end pl:RegisterEvent(Tiempo,120,1)
+end
+RegisterItemEvent(6948,5,Al_Eliminar_Piedra)
